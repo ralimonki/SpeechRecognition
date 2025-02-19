@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>錄音轉文字並朗讀</title>
+</head>
+<body>
+
+<h2>點擊下方按鈕開始錄音</h2>
+<button id="start-recording">開始錄音</button>
+<button id="read-text" disabled>朗讀錄音結果</button>
+<p>錄音結果：<span id="result"></span></p>
+
+<script>
+    let transcriptText = '';  // 用來儲存轉換後的文字
+
+    // 檢查瀏覽器是否支持語音識別API
+    if (!('webkitSpeechRecognition' in window)) {
+        alert('您的瀏覽器不支持語音識別功能');
+    } else {
+        // 當用戶點擊按鈕時，請求麥克風權限
+        document.getElementById('start-recording').addEventListener('click', () => {
+            // 獲取麥克風的音頻流
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then((stream) => {
+                    // 成功獲得麥克風權限，開始語音識別
+                    startSpeechRecognition();
+                })
+                .catch((error) => {
+                    // 如果沒有麥克風權限，顯示錯誤
+                    alert('無法訪問麥克風：' + error.message);
+                });
+        });
+
+        const recognition = new webkitSpeechRecognition();  // 使用Webkit語音識別
+        recognition.lang = 'zh-TW';  // 設置語言為繁體中文
+        recognition.continuous = true;  // 持續識別
+        recognition.interimResults = true;  // 即時結果
+
+        // 開始語音識別
+        function startSpeechRecognition() {
+            recognition.start();  // 開始語音識別
+        }
+
+        // 當識別到語音時，將語音轉換為文字並顯示
+        recognition.onresult = (event) => {
+            let transcript = '';  // 儲存識別結果
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                transcript += event.results[i][0].transcript;
+            }
+            transcriptText = transcript;  // 儲存轉換後的文字
+            document.getElementById('result').textContent = transcript;  // 顯示轉換後的文字
+            
+            // 啟用朗讀按鈕
+            document.getElementById('read-text').disabled = false;
+        };
+
+        // 當語音識別遇到錯誤時的處理
+        recognition.onerror = (event) => {
+            console.error('語音識別錯誤:', event.error);
+        };
+
+        // 當用戶點擊朗讀按鈕時，朗讀文字
+        document.getElementById('read-text').addEventListener('click', () => {
+            speakText(transcriptText);  // 朗讀已轉換的文字
+        });
+
+        // 朗讀文字
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);  // 創建一個語音對象
+            utterance.lang = 'zh-TW';  // 設置語音語言為繁體中文
+            speechSynthesis.speak(utterance);  // 開始朗讀
+        }
+    }
+</script>
+
+</body>
+</html>
