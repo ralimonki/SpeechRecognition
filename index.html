@@ -33,7 +33,7 @@
                 });
         });
 
-        alert('Test 8');
+        alert('Test 9');
         const userAgent = navigator.userAgent.toLowerCase();
         alert(userAgent);
         var recognition = null;
@@ -66,6 +66,16 @@
             }
         }
 
+        recognition.onstart = () => {
+            alert("語音識別已經開始");
+            console.log("語音識別已經開始");
+        };
+
+        recognition.onend = () => {
+            alert("語音識別結束");
+            console.log("語音識別結束");
+        };
+        
         // 當識別到語音時，將語音轉換為文字並顯示
         recognition.onresult = (event) => {
             console.log(event);
