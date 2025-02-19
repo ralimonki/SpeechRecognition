@@ -33,7 +33,7 @@
                 });
         });
 
-        alert('Test 9');
+        alert('Test 10');
         const userAgent = navigator.userAgent.toLowerCase();
         alert(userAgent);
         var recognition = null;
@@ -71,9 +71,20 @@
             console.log("語音識別已經開始");
         };
 
-        recognition.onend = () => {
+        recognition.onend = (event) => {
             alert("語音識別結束");
             console.log("語音識別結束");
+            alert(JSON.stringify(event));
+
+            let transcript = '';  // 儲存識別結果
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                transcript += event.results[i][0].transcript;
+            }
+            transcriptText = transcript;  // 儲存轉換後的文字
+            document.getElementById('result').textContent = transcript;  // 顯示轉換後的文字
+            
+            // 啟用朗讀按鈕
+            document.getElementById('read-text').disabled = false;
         };
         
         // 當識別到語音時，將語音轉換為文字並顯示
