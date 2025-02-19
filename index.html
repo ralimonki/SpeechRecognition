@@ -34,14 +34,21 @@
         });
 
         const userAgent = navigator.userAgent.toLowerCase();
+        alert(userAgent);
         var recognition = null;
-        if (/android|iphone|ipod|ipad|mobile|windows phone|blackberry|phone/.test(userAgent)) { // 手機
-            recognition = new SpeechRecognition();  // 使用Webkit語音識別
-            alert('手機');
-        } else { // 電腦
-            recognition = new webkitSpeechRecognition();  // 使用Webkit語音識別
-            alert('電腦');
-        }        
+        try {
+            if (/android|iphone|ipod|ipad|mobile|windows phone|blackberry|phone/.test(userAgent)) { // 手機
+                alert('手機');
+                recognition = new SpeechRecognition();  // 使用Webkit語音識別
+            } else { // 電腦
+                alert('電腦');
+                recognition = new webkitSpeechRecognition();  // 使用Webkit語音識別
+            }        
+        } catch (error) {
+            alert('發生錯誤: ' + error.message);
+            alert(error);
+            alert(JSON.stringify(error));
+        }
         recognition.lang = 'zh-TW';  // 設置語言為繁體中文
         recognition.continuous = true;  // 持續識別
         recognition.interimResults = true;  // 即時結果
