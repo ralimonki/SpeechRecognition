@@ -74,7 +74,8 @@
         recognition.onend = (event) => {
             alert("語音識別結束");
             console.log("語音識別結束");
-            alert(JSON.stringify(event));
+            alert("Result Index: " + event.resultIndex);  // 顯示結果索引
+            alert("Results Length: " + event.results.length);  // 顯示結果長度
 
             let transcript = '';  // 儲存識別結果
             for (let i = event.resultIndex; i < event.results.length; i++) {
