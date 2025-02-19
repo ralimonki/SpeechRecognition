@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h2>點擊下方按鈕開始錄音 v11</h2>
+<h2>點擊下方按鈕開始錄音 v12</h2>
 <button id="start-recording">開始錄音</button>
 <button id="read-text" disabled>朗讀錄音結果</button>
 <p>錄音結果：<span id="result"></span></p>
@@ -74,8 +74,24 @@
             alert("語音識別結束");
             console.log("語音識別結束");
             alert("Result Index: " + event.resultIndex);  // 顯示結果索引
-            alert("Results Length: " + event.results.length);  // 顯示結果長度
-
+            alert(event.isTrusted);
+            alert(event.bubbles);
+            alert(event.cancelBubble);
+            alert(event.cancelable);
+            alert(event.composed);
+            alert(event.currentTarget);
+            alert(event.SpeechRecognition);
+            alert(event.defaultPrevented);
+            alert(event.eventPhase);
+            alert(event.resultIndex);
+            alert(event.results);
+            alert(event.SpeechRecognitionResultList);
+            alert(event.returnValue);
+            alert(event.srcElement);
+            alert(event.target);
+            alert(event.timeStamp);
+            alert(event.type);
+            alert(event.result);
             let transcript = '';  // 儲存識別結果
             for (let i = event.resultIndex; i < event.results.length; i++) {
                 transcript += event.results[i][0].transcript;
