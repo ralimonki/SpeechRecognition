@@ -59,6 +59,7 @@
         // 當語音識別遇到錯誤時的處理
         recognition.onerror = (event) => {
             console.error('語音識別錯誤:', event.error);
+            alert('語音識別錯誤: ' + event.error);
         };
 
         // 當用戶點擊朗讀按鈕時，朗讀文字
