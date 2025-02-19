@@ -33,7 +33,7 @@
                 });
         });
 
-        alert('Test 4');
+        alert('Test 5');
         const userAgent = navigator.userAgent.toLowerCase();
         alert(userAgent);
         var recognition = null;
@@ -51,7 +51,6 @@
         } catch (error) {
             alert('發生錯誤: ' + error.message);
             alert(error);
-            alert(JSON.stringify(error));
         }
         recognition.lang = 'zh-TW';  // 設置語言為繁體中文
         recognition.continuous = true;  // 持續識別
@@ -59,7 +58,12 @@
 
         // 開始語音識別
         function startSpeechRecognition() {
-            recognition.start();  // 開始語音識別
+            try {
+                recognition.start();  // 開始語音識別
+            } catch (error) {
+                alert('發生錯誤: ' + error.message);
+                alert(error);
+            }
         }
 
         // 當識別到語音時，將語音轉換為文字並顯示
