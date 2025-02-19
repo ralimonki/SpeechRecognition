@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h2>點擊下方按鈕開始錄音 v12</h2>
+<h2>點擊下方按鈕開始錄音 v13</h2>
 <button id="start-recording">開始錄音</button>
 <button id="read-text" disabled>朗讀錄音結果</button>
 <p>錄音結果：<span id="result"></span></p>
@@ -73,6 +73,8 @@
         recognition.onend = (event) => {
             alert("語音識別結束");
             console.log("語音識別結束");
+            console.log(event);
+            /*
             alert("Result Index: " + event.resultIndex);  // 顯示結果索引
             alert(event.isTrusted);
             alert(event.bubbles);
@@ -92,6 +94,7 @@
             alert(event.timeStamp);
             alert(event.type);
             alert(event.result);
+            */
             let transcript = '';  // 儲存識別結果
             for (let i = event.resultIndex; i < event.results.length; i++) {
                 transcript += event.results[i][0].transcript;
