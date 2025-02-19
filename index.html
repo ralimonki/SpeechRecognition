@@ -16,7 +16,7 @@
     let transcriptText = '';  // 用來儲存轉換後的文字
 
     // 檢查瀏覽器是否支持語音識別API
-    if (!('webkitSpeechRecognition' in window)) {
+    if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
         alert('您的瀏覽器不支持語音識別功能');
     } else {
         // 當用戶點擊按鈕時，請求麥克風權限
@@ -33,7 +33,7 @@
                 });
         });
 
-        const recognition = new webkitSpeechRecognition();  // 使用Webkit語音識別
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();  // 使用Webkit語音識別
         recognition.lang = 'zh-TW';  // 設置語言為繁體中文
         recognition.continuous = true;  // 持續識別
         recognition.interimResults = true;  // 即時結果
