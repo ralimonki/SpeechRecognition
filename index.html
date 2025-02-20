@@ -7,13 +7,13 @@
 </head>
 <body>
 
-<h2>點擊下方按鈕開始錄音 v13</h2>
+<h2>點擊下方按鈕開始錄音 v14</h2>
 <button id="start-recording">開始錄音</button>
 <button id="read-text" disabled>朗讀錄音結果</button>
 <p>錄音結果：<span id="result"></span></p>
 
 <script>
-    let transcriptText = '';  // 用來儲存轉換後的文字
+    let transcriptText = '錄音轉文字並朗讀，點擊下方按鈕開始錄音';  // 用來儲存轉換後的文字
 
     // 檢查瀏覽器是否支持語音識別API
     if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
@@ -34,17 +34,17 @@
         });
 
         const userAgent = navigator.userAgent.toLowerCase();
-        alert(userAgent);
+        //alert(userAgent);
         var recognition = null;
         try {
             if (/android|iphone|ipod|ipad|mobile|windows phone|blackberry|phone/.test(userAgent)) { // 手機
-                alert('手機');
+                //alert('手機');
                 recognition = new window.webkitSpeechRecognition();  // 使用Webkit語音識別 
                 //recognition = new window.SpeechRecognition();  // 使用Webkit語音識別 NG
                 //recognition = new webkitSpeechRecognition();  // 使用Webkit語音識別 OK
                 //recognition = new SpeechRecognition();  // 使用Webkit語音識別 NG
             } else { // 電腦
-                alert('電腦');
+                //alert('電腦');
                 recognition = new webkitSpeechRecognition();  // 使用Webkit語音識別
             }        
         } catch (error) {
